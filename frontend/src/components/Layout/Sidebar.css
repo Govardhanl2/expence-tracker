@@ -1,0 +1,107 @@
+/* ══════════════════════════════════════
+   BOTTOM NAVIGATION BAR
+══════════════════════════════════════ */
+.sidebar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: var(--bottomnav-height);
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1.5px solid var(--border);
+  box-shadow: 0 -4px 24px rgba(0,0,0,0.07);
+  z-index: 100;
+  display: flex;
+  align-items: stretch;
+  /* hide old vertical elements */
+}
+
+/* Hide brand + section label + footer in bottom-nav mode */
+.sidebar-brand,
+.nav-section-label,
+.sidebar-footer { display: none; }
+
+/* Nav becomes a horizontal row */
+.sidebar-nav {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-around;
+  width: 100%;
+  padding: 0;
+  gap: 0;
+  overflow: visible;
+}
+
+/* Each nav item */
+.nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px 4px;
+  border-radius: 0;
+  border: none;
+  color: var(--text-muted);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+  transition:
+    color      var(--t-fast) var(--ease-in-out),
+    background var(--t-fast) var(--ease-in-out);
+  position: relative;
+  text-decoration: none;
+}
+
+/* Top accent line on active */
+.nav-item::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 20%; right: 20%;
+  height: 3px;
+  background: var(--accent);
+  border-radius: 0 0 4px 4px;
+  transform: scaleX(0);
+  transition: transform var(--t-base) var(--ease-spring);
+}
+.nav-item.active::before { transform: scaleX(1); }
+
+.nav-item:hover {
+  color: var(--accent);
+  background: var(--accent-dim);
+}
+
+.nav-item.active {
+  color: var(--accent);
+  background: transparent;
+}
+
+/* Icon pill on active */
+.nav-icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px; height: 32px;
+  border-radius: var(--radius-sm);
+  transition:
+    background  var(--t-fast) var(--ease-in-out),
+    transform   var(--t-fast) var(--ease-spring);
+}
+.nav-item.active .nav-icon-wrap {
+  background: var(--accent-dim);
+  transform: translateY(-2px);
+}
+.nav-item:hover .nav-icon-wrap {
+  transform: translateY(-2px);
+}
+
+.nav-icon { flex-shrink: 0; }
+.nav-label { line-height: 1; }
+
+@media (max-width: 400px) {
+  .nav-label { display: none; }
+  .nav-item { font-size: 0; }
+}
