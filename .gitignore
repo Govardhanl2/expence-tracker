@@ -49,3 +49,4 @@ coverage/
 *.pem
 .cache/
 .parcel-cache/
+.tools/
