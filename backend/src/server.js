@@ -22,7 +22,8 @@ app.use(cors({
     const allowed = (process.env.CORS_ORIGIN || 'http://localhost:3000')
       .split(',')
       .map(o => o.trim());
-    if (allowed.includes(origin) || allowed.includes('*')) {
+    const isVercelApp = /^https:\/\/[a-z0-9-]+\.vercel\.app$/i.test(origin);
+    if (allowed.includes(origin) || allowed.includes('*') || isVercelApp) {
       return callback(null, true);
     }
     return callback(new Error(`CORS blocked: ${origin}`));
